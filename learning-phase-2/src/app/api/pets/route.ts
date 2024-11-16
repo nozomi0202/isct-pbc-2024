@@ -5,12 +5,12 @@ import prisma from '../../../../lib/prisma'
 // GET /api/pets
 export async function GET() {
   const pets = await prisma.pet.findMany({
-    // sort by id ascending
     orderBy: { id: 'asc' },
-    select: { id: true, name: true, imageUrl: true, owner: { select: { name: true } } },
+    select: { id: true, name: true, imageUrl: true, owner: { select: { name: true } } }
   })
   return NextResponse.json({ pets })
 }
+
 // POST /api/pets
 export async function POST(request: Request) {
   // get data from request body
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   // create pet record
   const pet = await prisma.pet.create({
     // data from request body
-    data: data.pet,
+    data: data.pet
   })
   // return Response with pet to json
   return NextResponse.json({ pet })
@@ -33,7 +33,7 @@ export async function PUT(request: Request) {
     // where gender is Male
     where: { gender: 'Male' },
     // data from request body
-    data: data.pet,
+    data: data.pet
   })
   // return Response with pet to json
   return NextResponse.json({ pets })
@@ -46,4 +46,3 @@ export async function DELETE() {
   // return Response with pets to json
   return NextResponse.json({ pets })
 }
-
